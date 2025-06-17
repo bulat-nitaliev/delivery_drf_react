@@ -1,9 +1,10 @@
 from itertools import groupby
 from operator import itemgetter
 from django.db.models import QuerySet
-from django.db.models import Prefetch, Count
-from django.db.models.functions import TruncDate
+from django.db.models import Prefetch, Count, F
+from django.db.models.functions import Cast
 from api.models import Delivery, Service
+from django.db import models
 
 
 def data_deliveries()->QuerySet:
@@ -35,7 +36,7 @@ def data_deliveries()->QuerySet:
 
 def get_groupby_date_delivery()->QuerySet:
     return Delivery.objects.annotate(
-            date_only=TruncDate('created_at')
+            date_only=Cast(F('created_at'), output_field=models.DateField())
             ).values('date_only').annotate(
                 count=Count('id')
                 ).order_by('date_only')

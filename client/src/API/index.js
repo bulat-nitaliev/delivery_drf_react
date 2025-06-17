@@ -1,8 +1,9 @@
-import axios from "axios";
+
+import $api from "./http";
 
 export default class AuthService {
   static async login({ username, password }) {
-    const response = await axios.post("http://localhost:8000/api/token/", {
+    const response = await $api.post("/api/token/", {
       username,
       password,
     });

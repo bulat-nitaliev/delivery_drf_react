@@ -29,6 +29,8 @@ const MyTable = ({ thead, dataDelivery }) => {
               <TableCell>{item.number_model__name}</TableCell>
               <TableCell>{item.services}</TableCell>
               <TableCell>{item.distance}</TableCell>
+              <TableCell>{item.package__name}</TableCell>
+              <TableCell>{item.stutus_delivery__name}</TableCell>
             </TableRow>
           ))}
         </TableBody>

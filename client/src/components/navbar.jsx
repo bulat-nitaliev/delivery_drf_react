@@ -8,7 +8,8 @@ const Navbar = () => {
   const logout = () => {
     setIsAuth(false);
     localStorage.removeItem("auth");
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh");
   };
   return (
     <AppBar position="static">

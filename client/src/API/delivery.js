@@ -1,8 +1,8 @@
-import axios from "axios";
+import $api from "./http";
 
 export default class Delivery {
   static async get_delivery_line() {
-    const response = await axios.get("http://localhost:8000/api/deliveries_list/");
+    const response = await $api.get("/api/deliveries_list/");
     return response;
   }
 }

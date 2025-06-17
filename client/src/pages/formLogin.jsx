@@ -19,7 +19,8 @@ const FormLogin = () => {
     e.preventDefault();
     try {
       const res = await AuthService.login(loginData);
-      localStorage.setItem("access_token", res.data.access);
+      localStorage.setItem("token", res.data.access);
+      localStorage.setItem("refresh", res.data.refresh);
       localStorage.setItem("auth", "true");
       setIsAuth(true);
 

@@ -60,6 +60,7 @@ class DeliveryApiView(APIView):
         data_grouped = sorted_groupby_data(deliveries=deliveries)
 
         line_data = get_groupby_date_delivery()
+        
 
         return Response({"deliveries_list": data_grouped, "line_data": line_data})
     
