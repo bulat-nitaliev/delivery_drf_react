@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from datetime import timedelta
 import os
 from pathlib import Path
-
+from decouple import config as cf
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -25,9 +25,9 @@ print(BASE_DIR)
 SECRET_KEY = "django-insecure-ynuu@u%(o+#8!k#8#rrw7imxv5o2zgu_5=ndzu8^!$x3!a*_(2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost:8000', '0.0.0.0:8000']
 
 
 AUTH_USER_MODEL = "api.User"
@@ -60,10 +60,10 @@ MIDDLEWARE = [
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:3000", "http://client:3000"
 ]  # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://client:3000"]
 
 CORS_ALLOW_HEADERS = [
     "accept",
@@ -97,17 +97,17 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ['NAME'],
-        "USER": os.environ['USER'],
-        "PASSWORD": os.environ['PASSWORD'],
-        "HOST": "localhost",
+        "NAME": cf('DB_NAME'),
+        "USER": cf('DB_USER'),
+        "PASSWORD": cf('DB_PASS'),
+        "HOST": "db",
         "PORT": 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -143,7 +143,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+# STATIC_URL = "static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 MEDIA_URL = "/media/"

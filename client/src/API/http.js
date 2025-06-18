@@ -1,8 +1,6 @@
 import axios from "axios";
-import { AuthContext } from "../context";
-import { useContext } from "react";
 
-export const API_URL = "http://127.0.0.1:8000";
+export const API_URL = "";
 
 const $api = axios.create({
   withCredentials: true,
@@ -37,11 +35,9 @@ $api.interceptors.response.use(
         return $api.request(originalRequest);
       } catch (error) {
         console.log(error);
-        
       }
     }
     throw error;
-    
   }
 );
 

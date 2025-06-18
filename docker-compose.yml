@@ -1,0 +1,70 @@
+services:
+  db:
+    image: postgres:16.2
+    restart: always
+    shm_size: 128mb
+    container_name: db
+
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - net
+
+  server:
+    build:
+      context: ./server/config
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 -w 2
+    restart: unless-stopped
+    env_file:
+      - ./server/config/.env
+    volumes:
+      - static:/usr/src/app/static
+      - media:/usr/src/app/media
+    networks:
+      - net
+    container_name: server
+    depends_on:
+      - db
+
+  client:
+    build:
+      context: ./client
+    # ports:
+    #   - "80:80"
+    command: serve -s /usr/src/app/build -l 3000
+
+    restart: unless-stopped
+    networks:
+      - net
+    container_name: client
+    depends_on:
+      - server
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - 80:80
+    restart: unless-stopped
+    volumes:
+      - static:/usr/src/app/static
+      - media:/usr/src/app/media
+    depends_on:
+      - server
+      - client
+    networks:
+      - net
+
+volumes:
+  postgres_data:
+  static:
+  media:
+
+networks:
+  net:
+    driver: bridge
