@@ -3,7 +3,12 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from api.models import Delivery, Service, TypePackage, StatusDelivery,NumberModel
 from rest_framework.permissions import IsAuthenticated
-from api.serializers import DeliverySerializers, NameSerializers, NumberModelSerializer
+from api.serializers import (
+    DeliverySerializers, 
+    NameSerializers, 
+    NumberModelSerializer,
+    DeliveryCreateUpdateSerializer
+)
 from django.db.models import Prefetch
 
 from .utils import sorted_groupby_data, data_deliveries, get_groupby_date_delivery
@@ -45,11 +50,27 @@ class DeliveryModelVIewSet(ModelViewSet):
                     )
             )
     # permission_classes = [IsAuthenticated,]
-    serializer_class = DeliverySerializers
+    # serializer_class = DeliverySerializers
 
+    def get_serializer_class(self):
+        if self.action in ['create', 'update','partial_update']:
+            return DeliveryCreateUpdateSerializer
+        return DeliverySerializers #super().get_serializer_class()
 
+    def create(self, request, *args, **kwargs):
+        self.queryset = Delivery.objects.all()
+        return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
     
-    # permission_classes = [IsAuthenticated]
+
     
     
 class DeliveryApiView(APIView):

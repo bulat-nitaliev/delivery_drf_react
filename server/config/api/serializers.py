@@ -67,3 +67,8 @@ class NumberModelSerializer(serializers.ModelSerializer):
 
   def get_model_name(self, obj):
     return str(obj.name_model)
+  
+class DeliveryCreateUpdateSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Delivery
+    fields = '__all__'
