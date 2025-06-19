@@ -10,15 +10,15 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - postgres_data:/var/lib/postgresql@14/data/
+      - psql_data:/var/lib/postgresql/data/
     networks:
       - net
 
   server:
     build:
       context: ./server/config
-    command: python manage.py runserver 0.0.0.0:8000
-    # command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 -w 2
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 -w 2
     restart: unless-stopped
     env_file:
       - ./server/config/.env
@@ -61,7 +61,7 @@ services:
       - net
 
 volumes:
-  postgres_data:
+  psql_data:
   static:
   media:
 
