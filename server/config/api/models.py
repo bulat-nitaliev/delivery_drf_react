@@ -53,7 +53,7 @@ class Delivery(models.Model):
     stutus_delivery = models.ForeignKey(to=StatusDelivery, on_delete=models.CASCADE)
     package = models.ForeignKey(to=TypePackage, on_delete=models.CASCADE)
 
-    CONDITION = (("1", "исправно"), ("0", "неисправно"))
+    CONDITION = (("properly", "not working properly"), ("исправно", "неисправно"))
     technical_condition = models.CharField(
         verbose_name="техническое состояние", choices=CONDITION
     )

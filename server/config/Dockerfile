@@ -16,11 +16,10 @@ RUN pip install --no-cache gunicorn
 
 # copy django project
 COPY . .
-COPY .env ./server
 
 # run entrypoint.sh
-RUN chmod +x /usr/src/app/config/entrypoint.sh
-ENTRYPOINT ["/usr/src/app/config/entrypoint.sh"]
+RUN chmod +x /usr/src/app/entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
 EXPOSE 8000
 

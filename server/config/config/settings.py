@@ -17,7 +17,7 @@ from decouple import config as cf
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+print(BASE_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-ynuu@u%(o+#8!k#8#rrw7imxv5o2zgu_5=ndzu8^!$x3!a*_(2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost:8000', '0.0.0.0:8000']
+ALLOWED_HOSTS = ["10.64.0.86"]
 
 
 AUTH_USER_MODEL = "api.User"
@@ -104,7 +104,7 @@ DATABASES = {
         "NAME": cf('DB_NAME'),
         "USER": cf('DB_USER'),
         "PASSWORD": cf('DB_PASS'),
-        "HOST": "db",
+        "HOST": "localhost",
         "PORT": 5432,
     }
 }

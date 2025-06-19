@@ -44,7 +44,7 @@ class DeliveryModelVIewSet(ModelViewSet):
                     to_attr='prefetched_services'
                     )
             )
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
     serializer_class = DeliverySerializers
 
 

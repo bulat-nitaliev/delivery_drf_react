@@ -1,0 +1,11 @@
+node_modules;
+dist.git;
+npm - debug.log.coverage.coverage;
+
+__pycache__;
+env;
+pip - log.txt;
+pip - delete -this - directory.txt.tox;
+nosetests.xml;
+coverage.xml.git.mypy_cache.pytest_cache.hypothesis;
+venv;

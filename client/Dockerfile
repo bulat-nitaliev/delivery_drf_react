@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS build-stage
+FROM node:lts-slim AS build-stage
 ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR /usr/src/app
 

@@ -9,27 +9,36 @@ class DeliverySerializers(serializers.ModelSerializer):
   technical_condition = serializers.SerializerMethodField()
   stutus_delivery = serializers.SerializerMethodField()
   package = serializers.SerializerMethodField()
+  model = serializers.SerializerMethodField()
 
   class Meta:
     model = Delivery
     fields = (
+      "id",
       "travel_time",
       "distance",
       "mediafile",
       "technical_condition",
       "number_model",
+      "model",
       "stutus_delivery",
       "package",
       "service_name",
-      "user"
+      "user",
+      "number_model_id",
+      "package_id",
+      "stutus_delivery_id",
+      "user_id"
     )
 
   def get_service_name(self,obj):
     return [i.name for i in obj.prefetched_services]
   
   def get_number_model(self,obj):
-    print(obj.number_model)
     return str(obj.number_model)
+  
+  def get_model(self,obj):
+    return str(obj.number_model.name_model.name)
   
   def get_package(self,obj):
     return str(obj.package)
