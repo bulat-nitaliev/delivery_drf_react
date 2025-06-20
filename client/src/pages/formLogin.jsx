@@ -34,7 +34,7 @@ const FormLogin = () => {
       <Box sx={{ maxWidth: "50%", mx: "auto", mt: 10 }}>
         <Card variant="outlined">
           <CardContent sx={{ width: "70%", mx: "auto" }}>
-            <Typography variant="h4">войти на сайт</Typography>
+            <Typography variant="h5">войти на сайт</Typography>
             <TextField
               type="text"
               placeholder="username"
