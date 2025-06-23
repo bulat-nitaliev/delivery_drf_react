@@ -53,6 +53,7 @@ class DeliverySerializers(serializers.ModelSerializer):
 
 
 class NameSerializers(serializers.Serializer):
+  id = serializers.IntegerField()
   name = serializers.CharField()
 
 
@@ -61,6 +62,7 @@ class NumberModelSerializer(serializers.ModelSerializer):
   class Meta:
     model = NumberModel
     fields = (
+      'id',
       'name',
       'model_name'
     )
