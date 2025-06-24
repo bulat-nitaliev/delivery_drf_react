@@ -10,7 +10,7 @@ import {
 
 const MyTable = ({ thead, dataDelivery }) => {
   return (
-    <TableContainer component={Paper} sx={{ mt: 5 }}>
+    <TableContainer component={Paper} sx={{ mt: 5 , marginBottom: 20}}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
