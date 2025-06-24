@@ -34,13 +34,13 @@ python manage.py createsuperuser
 перейти по адресу http://localhost/admin для Django Admin
 
 
-![alt text](auth.png)
-![alt text](allDel.png)
-![alt text](filter.png)
-![alt text](deliv.png)
-![alt text](deliveries.png)
-![alt text](service.png)
-![alt text](package.png)
-![alt text](status.png)
-![alt text](model.png)
-![alt text](number.png)
+![alt text](img/auth.png)
+![alt text](img/allDel.png)
+![alt text](img/filter.png)
+![alt text](img/deliv.png)
+![alt text](img/deliveries.png)
+![alt text](img/service.png)
+![alt text](img/package.png)
+![alt text](img/status.png)
+![alt text](img/model.png)
+![alt text](img/number.png)
